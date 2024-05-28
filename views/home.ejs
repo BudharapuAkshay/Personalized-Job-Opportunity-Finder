@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .home-container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 300px;
+            margin: 15px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/">Logout</a>
+    </div>
+
+    <div class="home-container">
+        <h2>Welcome, <%= un %>!</h2>
+
+
+        
+        <div class="job-section">
+            <h3>Google Jobs</h3>
+            <div class="card-container">
+                <% for (const job of googleJobs) { %>
+                    <div class="card">
+                        <strong>Title:</strong> <%= job.title %><br>
+                        <strong>Location:</strong> <%= job.loc %><br>
+                        <strong>Details:</strong> <%= job.det %><br>
+                        <button onclick="openGoogleApplyLink('<%= job.title %>', '<%= job.loc %>', '<%= job.link %>')">Apply Now</button>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        
+        <div class="job-section">
+            <h3>Apple Jobs</h3>
+            <div class="card-container">
+                <% for (const appleJob of appleJobs) { %>
+                    <div class="card">
+                        <strong>Title:</strong> <%= appleJob.title %><br>
+                        <strong>Location:</strong> <%= appleJob.location %><br>
+                        <button onclick="openAppleApplyLink('<%= appleJob.title %>','<%= appleJob.location %>','<%= appleJob.applyLink %>')">Apply Now</button>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    
+   
+    <script>
+        let appliedJobLink = null;
+        
+        function openGoogleApplyLink(title, loc, applyLink) {
+            const baseUrl = 'https://www.google.com/about/careers/applications/';
+            const absoluteLink = baseUrl + applyLink;
+            appliedJobDetails = { title, loc, absoluteLink};
+            appliedJobLink = absoluteLink;
+            sessionStorage.setItem('jobApplicationLink', absoluteLink);
+            window.open(absoluteLink, '_blank'); 
+        }
+    
+        function openAppleApplyLink(title, loc, applyLink) {
+            const baseUrl = 'https://jobs.apple.com';
+            const absoluteLink = baseUrl + applyLink;
+            appliedJobDetails = { title, loc, absoluteLink};
+            appliedJobLink = absoluteLink;
+            sessionStorage.setItem('jobApplicationLink', absoluteLink);
+            window.open(absoluteLink, '_blank'); 
+        }
+    
+        window.onfocus = function() {
+            if (appliedJobLink) {
+                const confirmApply = prompt('Have you applied for this job? (Yes/No)');
+                if (confirmApply && confirmApply.toLowerCase() === 'yes') {
+                    
+                    
+                    console.log(JSON.stringify(appliedJobDetails));
+                    fetch('/apply-job', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(appliedJobDetails)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Application submitted successfully!');
+                            alert('Application submitted successfully!');
+                        } else {
+                            console.error('Failed to submit application');
+                            throw new Error('Failed to submit application');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error submitting application:', error);
+                        alert('Failed to submit application. Please try again later.');
+                    });
+                } else {
+                    
+                    console.log('User has not applied for the job');
+                }
+                appliedJobLink = null; 
+            }
+        };
+        
+        
+    </script>
+    
+    
+    <script src="../app.js"></script>
+</body>
+
+</html>

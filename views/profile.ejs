@@ -1,0 +1,236 @@
+
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+            
+    
+            .profile-container {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 800px;
+                margin: 20px;
+            }
+        
+            h2 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+        
+            h3 {
+                margin-top: 20px;
+                margin-bottom: 10px;
+                font-size: 1.2em;
+                color: #555;
+            }
+        
+            label {
+                display: block;
+                margin: 10px 0;
+                color: #333;
+            }
+        
+            input,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+        
+            .radio-group {
+                display: flex;
+                margin-bottom: 15px;
+            }
+        
+            .radio-group label {
+                margin-right: 20px;
+            }
+        
+            button {
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 1em;
+                width: fit-content;
+                display: block;
+                margin: auto;
+            }
+        
+            button:hover {
+                background-color: #0056b3;
+            }
+        
+            textarea {
+                resize: vertical;
+            }
+        
+            center {
+                text-align: center;
+                margin-top: 20px;
+            }
+        
+            p {
+                margin: 10px 0;
+                color: #555;
+            }
+        
+            a {
+                color: #007bff;
+                text-decoration: none;
+            }
+        
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+        
+    </head>
+    
+    <body>
+        
+        <div class="profile-container">
+            <h2>Your Profile</h2>
+            <form id="profileForm" action="/update-profile" method="POST">
+                <h3>Basic Details</h3>
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" value="<%= userData.fullName %>" required>
+        
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" value="<%= userData.dob %>" required>
+                
+                <div class="radio-group">
+                    <label>Gender:</label>
+                    <label for="male">
+                        <input type="radio" id="male" name="gender" value="male" <%= userData.gender === 'male' ? 'checked' : '' %>> Male
+                    </label>
+                    <label for="female">
+                        <input type="radio" id="female" name="gender" value="female" <%= userData.gender === 'female' ? 'checked' : '' %>> Female
+                    </label>
+                </div>
+                
+                <h3>About</h3>
+                <label for="summary">Summary:</label>
+                <textarea id="summary" name="summary" rows="4"><%= userData.summary %></textarea>
+                
+                <h3>Address</h3>
+                <label for="permanentAddress">Permanent Address:</label>
+                <textarea id="permanentAddress" name="permanentAddress" rows="4"><%= userData.permanentAddress %></textarea>
+    
+                <label for="currentAddress">Current Address:</label>
+                <textarea id="currentAddress" name="currentAddress" rows="4"><%= userData.currentAddress %></textarea>
+    
+                <h3>Current/Most Recent Course</h3>
+                <label for="institution">Institution:</label>
+                <input type="text" id="institution" name="institution" value="<%= userData.institution %>" required>
+    
+                <label for="programDegree">Program/Degree:</label>
+                <input type="text" id="programDegree" name="programDegree" value="<%= userData.programDegree %>" required>
+    
+                <label for="branch">Branch/Specialization:</label>
+                <input type="text" id="branch" name="branch" value="<%= userData.branch %>">
+    
+                <label for="semester">Current Semester:</label>
+                <input type="text" id="semester" name="semester" value="<%= userData.semester %>">
+    
+                <label for="yopo">Year of Passing Out:</label>
+                <input type="text" id="yopo" name="yopo" value="<%= userData.yopo %>">
+    
+                <h3>Previous Educations</h3>
+                <label for="previousInstitution">Institution:</label>
+                <input type="text" id="previousInstitution" name="previousInstitution" value="<%= userData.previousInstitution %>">
+    
+                <label for="boardUniversity">Board/University:</label>
+                <input type="text" id="boardUniversity" name="boardUniversity" value="<%= userData.boardUniversity %>">
+    
+                <label for="previousProgramDegree">Program/Degree:</label>
+                <input type="text" id="previousProgramDegree" name="previousProgramDegree" value="<%= userData.previousProgramDegree %>">
+    
+                <label for="branchPrevious">Branch/Specialization:</label>
+                <input type="text" id="branchPrevious" name="branchPrevious" value="<%= userData.branchPrevious %>">
+    
+                <label for="educationType">Education Type:</label>
+                <input type="text" id="educationType" name="educationType" value="<%= userData.educationType %>">
+    
+                <h3>Experience</h3>
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" value="<%= userData.companyName %>">
+    
+                <label for="jobTitle">Job Title:</label>
+                <input type="text" id="jobTitle" name="jobTitle" value="<%= userData.jobTitle %>">
+    
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" value="<%= userData.location %>">
+    
+                <label for="positionType">Position Type:</label>
+                <input type="text" id="positionType" name="positionType" value="<%= userData.positionType %>">
+    
+                <label for="jobFunction">Job Function:</label>
+                <input type="text" id="jobFunction" name="jobFunction" value="<%= userData.jobFunction %>">
+    
+                <label for="startDate">Start Date:</label>
+                <input type="text" id="startDate" name="startDate" value="<%= userData.startDate %>" placeholder="dd/mm/yyyy">
+    
+                <label for="endDate">End Date:</label>
+                <input type="text" id="endDate" name="endDate" value="<%= userData.endDate %>" placeholder="dd/mm/yyyy">
+    
+                <label for="salaryStipendRange">Salary/Stipend Range:</label>
+                <input type="text" id="salaryStipendRange" name="salaryStipendRange" value="<%= userData.salaryStipendRange %>">
+    
+                <h3>Skills</h3>
+                <label for="skills">Skills (Enter skills separated by commas):</label>
+                <textarea id="skills" name="skills" rows="2" placeholder="e.g., Programming, Data Analysis, Project Management"><%= userData.skills %></textarea>
+                
+                <h3>Languages</h3>
+                <label for="languages">Languages (Enter languages separated by commas):</label>
+                <textarea id="languages" name="languages" rows="2" placeholder="e.g., English, Spanish, French"><%= userData.languages %></textarea>
+                
+                <h3>Account Details</h3>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="<%= userData.username %>" required>
+    
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" value="<%= userData.password %>" required>
+    
+                <button type="submit">Update Profile</button>
+                
+            </form>
+            <script>
+                document.getElementById('profileForm').addEventListener('submit', function(event) {
+                   
+                    event.preventDefault();
+                    window.alert("Profile Updated");
+                    this.submit();
+                });</script>
+                
+            <a href="/home">Back to Home</a>&nbsp&nbsp&nbsp&nbsp
+            <a href="/">Logout</a>
+        </div>
+    
+        <script src="../public/app.js"></script>
+    </body>
+    
+    </html>
+    

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunity Finder</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .radio-group {
+            display: flex;
+            
+            
+        }
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            width: fit-content;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        center {
+            text-align: center;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    
+        
+        
+        <form id="registerForm" action="/register" method="POST">
+            <h1> Opportunity Finder</h1>
+            <h3>Basic Details</h3>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+    
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            <div class="radio-group">
+            <label>Gender:</label>
+            <label for="male">
+                <input type="radio" id="male" name="gender" value="male"> Male
+            </label>
+            <label for="female">
+                <input type="radio" id="female" name="gender" value="female"> Female
+            </label></div>
+            <h3>About</h3>
+        <label for="summary">Summary:</label>
+        <textarea id="summary" name="summary" placeholder="You can include roles you are looking for." rows="4"></textarea>
+        <h3>Address</h3>
+        <label for="permanentAddress">Permanent Address:</label>
+        <textarea id="permanentAddress" name="permanentAddress" rows="4"></textarea>
+
+        <label for="currentAddress">Current Address:</label>
+        <textarea id="currentAddress" name="currentAddress" rows="4"></textarea>
+
+        <h3>Current/Most Recent Course</h3>
+        <label for="institution">Institution:</label>
+        <input type="text" id="institution" name="institution" required>
+
+        <label for="programDegree">Program/Degree:</label>
+        <input type="text" id="programDegree" name="programDegree" required>
+
+        <label for="branch">Branch/Specialization:</label>
+        <input type="text" id="branch" name="branch">
+
+        <label for="semester">Current Semester:</label>
+        <input type="text" id="semester" name="semester">
+
+        <label for="yopo">Year of Passing Out:</label>
+        <input type="text" id="yopo" name="yopo">
+
+
+        <h3>Previous Educations</h3>
+        <label for="previousInstitution">Institution:</label>
+        <input type="text" id="previousInstitution" name="previousInstitution">
+
+        <label for="boardUniversity">Board/University:</label>
+        <input type="text" id="boardUniversity" name="boardUniversity">
+
+        <label for="previousProgramDegree">Program/Degree:</label>
+        <input type="text" id="previousProgramDegree" name="previousProgramDegree">
+
+        <label for="branchPrevious">Branch/Specialization:</label>
+        <input type="text" id="branchPrevious" name="branchPrevious">
+
+        <label for="educationType">Education Type:</label>
+        <input type="text" id="educationType" name="educationType">
+
+        <h3>Experience</h3>
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName">
+
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" name="jobTitle">
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location">
+
+        <label for="positionType">Position Type:</label>
+        <input type="text" id="positionType" name="positionType">
+
+        <label for="jobFunction">Job Function:</label>
+        <input type="text" id="jobFunction" name="jobFunction">
+
+        <label for="startDate">Start Date:</label>
+        <input type="text" id="startDate" name="startDate" placeholder="dd/mm/yyyy">
+
+        <label for="endDate">End Date:</label>
+        <input type="text" id="endDate" name="endDate" placeholder="dd/mm/yyyy">
+
+        <label for="salaryStipendRange">Salary/Stipend Range:</label>
+        <input type="text" id="salaryStipendRange" name="salaryStipendRange">
+
+        <h3>Skills</h3>
+        <label for="skills">Skills (Enter skills separated by commas):</label>
+        <textarea id="skills" name="skills" rows="2" placeholder="e.g., Programming, Data Analysis, Project Management"></textarea>
+        <h3>Languages</h3>
+        <label for="languages">Languages (Enter languages separated by commas):</label>
+        <textarea id="languages" name="languages" rows="2" placeholder="e.g., English, Spanish, French"></textarea>
+            
+            <h3>Register</h3>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <center><button type="submit">Register</button></center>
+            
+            <center><p>Already have an account?</p><a href="/">Login Here</a>.</p></center>
+        </form>
+        
+    </div>
+
+    <script src="../public/app.js"></script>
+</body>
+
+</html>
